@@ -19,15 +19,26 @@ struct StoryView: View {
     @State private var text: String = ""
     
     
-    
     var body: some View {
         ZStack {
-            //Color.primary.edgesIgnoringSafeArea(.all)
             
-            Image(myScenes[index].imageNames)
+            if myScenes[index].type == .image{
+                Image(myScenes[index].imageName)
+            }else if myScenes[index].type == .gif{
+                Image(myScenes[index].imageName)
+            }else{
+                switch myScenes[index].imageName{
+                case "#1_1":
+                    AnimationView1(index:index)
+                case "#1_2":
+                    AnimationView2(index:index)
+                default:
+                    EmptyView()
+                }
+            }
             
             HStack{
-                
+
                 // prev Button
                 Button{
                     // do something
@@ -60,17 +71,12 @@ struct StoryView: View {
                     .background(Color.black)
                     .offset(y:-48)
                     .font(.system(size: 50))
-                
-                /*Button("Dismiss Modal") {
-                 dismiss()}*/
-                
-                
             }
-            
+
         }
     }
                 
-                
+
                 
     struct Previews_StoryView_Previews: PreviewProvider {
         static var previews: some View {
@@ -79,4 +85,3 @@ struct StoryView: View {
         }
     }
 }
-

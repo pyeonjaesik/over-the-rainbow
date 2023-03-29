@@ -9,11 +9,13 @@ import Foundation
 
 // struct to have scene
 struct MyScene {
-    var imageNames: String
+    var imageName: String
     var subtitle: String
+    var type:SceneType
     
-    init(_imageNames: String, _subtitle: String) {
-        imageNames = _imageNames
-        subtitle = _subtitle
+    enum SceneType:String{
+        case image = "only Image"
+        case gif = "only Gif"
+        case animation = "added Animation"
     }
 }
