@@ -17,7 +17,6 @@ struct WikiView:View{
             ZStack{
                 Image("wiki")
                 Button{
-                    print("HI")
                     isPresented = true
                 }label: {
                     Rectangle()

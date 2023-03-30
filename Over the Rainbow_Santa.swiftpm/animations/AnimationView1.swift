@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVKit
 
 struct AnimationView1: View{
     @State var ShapeColor: Color = .blue
@@ -17,17 +18,7 @@ struct AnimationView1: View{
     var index:Int
     
     var body: some View {
-        ZStack {
-            Image(myScenes[index].imageName)
-            Circle()
-                .stroke(ShapeColor.opacity(ShapeOpacity), lineWidth: 40)
-                .frame(width: 260, height: 260, alignment: .center)
-                .offset(x: isAnimating ? 0 : UIScreen.main.bounds.size.width)
-                .animation(.easeIn(duration: 1), value: isAnimating)
-                
-        } //: ZSTACk
-        .onAppear(perform: {
-            isAnimating = true
-        })
+        VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "333",
+                                                               withExtension: "mp4")!))
     }
 }

@@ -7,7 +7,8 @@
 
 import Foundation
 import SwiftUI
-
+import AVKit
+import UIKit
 
 struct StoryView: View {
     //@Environment(\.dismiss) var dismiss
@@ -25,7 +26,8 @@ struct StoryView: View {
             if myScenes[index].type == .image{
                 Image(myScenes[index].imageName)
             }else if myScenes[index].type == .gif{
-                Image(myScenes[index].imageName)
+                
+                GIFImage(name: "ggg").frame(width: UIScreen.main.bounds.size.width ,height: UIScreen.main.bounds.size.height)
             }else{
                 switch myScenes[index].imageName{
                 case "#1_1":
@@ -36,7 +38,7 @@ struct StoryView: View {
                     EmptyView()
                 }
             }
-            
+
             HStack{
 
                 // prev Button
