@@ -31,7 +31,10 @@ struct StoryView: View {
         }
         guard bgm != currentBgm else { return }
         self.currentBgm = bgm
-        guard let url = Bundle.main.url(forResource: bgm, withExtension: ".mp3") else {
+        
+        let name = String(bgm.split(separator: ".")[0])
+        let ext = ".\(String(bgm.split(separator: ".")[1]))"
+        guard let url = Bundle.main.url(forResource: name, withExtension: ext) else {
             return }
         
         do {

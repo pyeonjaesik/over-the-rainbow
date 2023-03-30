@@ -19,12 +19,17 @@ struct SceneView2: View{
 
     func playSound() {
         player?.stop()
-        guard let sound = myScenes[index].subtitle[subIndex].1 else { return }
-        guard let url = Bundle.main.url(forResource: sound, withExtension: ".mp3") else { return }
+        guard let sound = myScenes[index].subtitle[subIndex].1 else {
+            return
+        }
+        let name = String(sound.split(separator: ".")[0])
+        let ext = ".\(String(sound.split(separator: ".")[1]))"
+        guard let url = Bundle.main.url(forResource: name, withExtension: ext) else {
+            return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
-            player?.stop()
+            
             
             player?.numberOfLoops = 1
             player?.play()
@@ -51,15 +56,19 @@ struct SceneView2: View{
             HStack{
                 Button{
                     // do something
-                    subIndex -= subIndex == 0 ? 0 : 1
-                    self.playSound()
+                    if subIndex != 0{
+                        subIndex -= subIndex == 0 ? 0 : 1
+                        self.playSound()
+                    }
                 }label :{
                     Rectangle()
                         .fill(Color.transparent)
                 }
                 Button{
-                    subIndex += myScenes[index].subtitle.count-1  == subIndex ? 0 : 1
-                    self.playSound()
+                    if subIndex != myScenes[index].subtitle.count-1{
+                        subIndex += myScenes[index].subtitle.count-1  == subIndex ? 0 : 1
+                        self.playSound()
+                    }
                 }label :{
                     Rectangle()
                         .fill(Color.transparent)

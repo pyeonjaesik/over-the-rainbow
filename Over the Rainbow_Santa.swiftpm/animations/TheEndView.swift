@@ -19,7 +19,7 @@ struct TheEndView: View{
                 .frame(width: UIScreen.main.bounds.size.width ,height: UIScreen.main.bounds.size.height)
                 .background(.black)
                 .onAppear() {
-                    guard let url = Bundle.main.url(forResource: "theEnd",
+                    guard let url = Bundle.main.url(forResource: "credit",
                                                         withExtension: "mp4") else {return}
                     player = AVPlayer(url: url)
                     player.play()

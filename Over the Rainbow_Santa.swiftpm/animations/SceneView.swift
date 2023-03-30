@@ -22,7 +22,11 @@ struct SceneView: View{
         guard let sound = myScenes[index].subtitle[subIndex].1 else {
             return
         }
-        guard let url = Bundle.main.url(forResource: sound, withExtension: ".mp3") else {
+
+        let name = String(sound.split(separator: ".")[0])
+        let ext = ".\(String(sound.split(separator: ".")[1]))"
+        
+        guard let url = Bundle.main.url(forResource: name, withExtension: ext) else {
             return }
         
         do {
@@ -55,15 +59,19 @@ struct SceneView: View{
             HStack{
                 Button{
                     // do something
-                    subIndex -= subIndex == 0 ? 0 : 1
-                    self.playSound()
+                    if subIndex != 0{
+                        subIndex -= subIndex == 0 ? 0 : 1
+                        self.playSound()
+                    }
                 }label :{
                     Rectangle()
                         .fill(Color.transparent)
                 }
                 Button{
-                    subIndex += myScenes[index].subtitle.count-1  == subIndex ? 0 : 1
-                    self.playSound()
+                    if subIndex != myScenes[index].subtitle.count-1{
+                        subIndex += myScenes[index].subtitle.count-1  == subIndex ? 0 : 1
+                        self.playSound()
+                    }
                 }label :{
                     Rectangle()
                         .fill(Color.transparent)
