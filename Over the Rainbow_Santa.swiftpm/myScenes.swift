@@ -9,10 +9,12 @@ import Foundation
 
 // aarray of struct
 var myScenes: [MyScene] = [
-    MyScene(imageName: "#1_1", subtitle: "this is 1 scene",type: MyScene.SceneType.animation),
-    MyScene(imageName: "#1_2", subtitle: "this is 2 scene",type: MyScene.SceneType.animation),
-    MyScene(imageName: "#1_3", subtitle: "this is 3 scene",type: MyScene.SceneType.gif),
-    MyScene(imageName: "#1_4", subtitle: "this is 4 scene",type: MyScene.SceneType.image),
+    MyScene(imageName: "#1_1", subtitle: [("#1_1_s1","#1_1_a1"),("#1_1_s2",nil)],bgm: "#2_2_b",type: MyScene.SceneType.image),
+    MyScene(imageName: "#1_4", subtitle: [("#1_1_s1","#1_1_a1"),("#1_1_s2","#1_1_a2")],bgm: "#2_2_b",type: MyScene.SceneType.image),
+    MyScene(imageName: "#1_2", subtitle: [("#1_1_s1","#1_1_a1"),("#1_1_s2","#1_1_a2")],bgm: nil,type: MyScene.SceneType.gif),
+//    MyScene(imageName: "#1_2", subtitle: "this is 2 scene",type: MyScene.SceneType.animation),
+//    MyScene(imageName: "#1_3", subtitle: "this is 3 scene",type: MyScene.SceneType.gif),
+//    MyScene(imageName: "#1_4", subtitle: "this is 4 scene",type: MyScene.SceneType.image),
 //    MyScene(_imageNames: "#2_1", _subtitle: "this is 5 scene"),
 //    MyScene(_imageNames: "#2_2", _subtitle: "this is 6 scene"),
 //    MyScene(_imageNames: "#2_3", _subtitle: "this is 7 scene"),

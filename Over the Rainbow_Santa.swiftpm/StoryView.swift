@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import AVKit
 import UIKit
+import AVFoundation
 
 struct StoryView: View {
     //@Environment(\.dismiss) var dismiss
@@ -19,15 +19,42 @@ struct StoryView: View {
     // text animation
     @State private var text: String = ""
     
+    @State var player: AVAudioPlayer?
+    
+    @State var currentBgm:String = ""
+    
+    func playSound() {
+        guard let bgm = myScenes[index].bgm else {
+            currentBgm = ""
+            player?.stop()
+            return
+        }
+        guard bgm != currentBgm else { return }
+        self.currentBgm = bgm
+        guard let url = Bundle.main.url(forResource: bgm, withExtension: ".mp3") else {
+            return }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.stop()
+            
+            player?.numberOfLoops = 99
+            player?.play()
+        } catch let error {
+             print("재생하는데 오류가 발생했습니다. \(error.localizedDescription)")
+        }
+
+    }
     
     var body: some View {
         ZStack {
-            
-            if myScenes[index].type == .image{
-                Image(myScenes[index].imageName)
-            }else if myScenes[index].type == .gif{
+            if myScenes[index].type != .animation {
+                if index%2 == 0{
+                    SceneView(index:index)
+                }else{
+                    SceneView2(index:index)
+                }
                 
-                GIFImage(name: "ggg").frame(width: UIScreen.main.bounds.size.width ,height: UIScreen.main.bounds.size.height)
             }else{
                 switch myScenes[index].imageName{
                 case "#1_1":
@@ -38,7 +65,6 @@ struct StoryView: View {
                     EmptyView()
                 }
             }
-
             HStack{
 
                 // prev Button
@@ -49,8 +75,10 @@ struct StoryView: View {
                     }else{
                         self.index -= 1
                     }
+                    self.playSound()
                 }label :{
                     Image("prev")
+                    
                 }
                 Spacer()
                 // next Button
@@ -61,20 +89,13 @@ struct StoryView: View {
                     }else{
                         self.index += 1
                     }
+                    self.playSound()
                 }label :{
                     Image("next")
                 }
             }
-            
-            VStack{
-                Spacer()
-                Text(myScenes[index].subtitle)
-                    .foregroundColor(.white)
-                    .background(Color.black)
-                    .offset(y:-48)
-                    .font(.system(size: 50))
-            }
-
+        }.onAppear{
+            self.playSound()
         }
     }
                 
