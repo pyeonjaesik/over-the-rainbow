@@ -10,7 +10,7 @@ import Foundation
 // struct to have scene
 struct MyScene {
     var imageName: String
-    var subtitle: [(String,String?)]
+    var subtitle: [(String?,String?)]
     var bgm:String?
     var type:SceneType
     

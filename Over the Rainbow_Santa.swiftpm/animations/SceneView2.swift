@@ -43,8 +43,10 @@ struct SceneView2: View{
             }
             VStack{
                 Spacer()
-                Image(myScenes[index].subtitle[subIndex].0)
-                    .offset(y:-64)
+                if myScenes[index].subtitle[subIndex].0 != nil{
+                    Image(myScenes[index].subtitle[subIndex].0!)
+                        .offset(y:-64)
+                }
             }
             HStack{
                 Button{
@@ -63,7 +65,8 @@ struct SceneView2: View{
                         .fill(Color.transparent)
                 }
             }
-        }.onAppear{
+        }.background(.black)
+        .onAppear{
             self.playSound()
         }
     }

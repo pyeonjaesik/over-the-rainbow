@@ -57,10 +57,8 @@ struct StoryView: View {
                 
             }else{
                 switch myScenes[index].imageName{
-                case "#1_1":
-                    AnimationView1(index:index)
-                case "#1_2":
-                    AnimationView2(index:index)
+                case "theEnd":
+                    TheEndView()
                 default:
                     EmptyView()
                 }
@@ -68,30 +66,25 @@ struct StoryView: View {
             HStack{
 
                 // prev Button
-                Button{
-                    // do something
-                    if(self.index == 0){
-                        self.index = 0
-                    }else{
-                        self.index -= 1
+                if index != 0{
+                    Button{
+                        // do something
+                        index -= index == 0 ? 0 : 1
+                        self.playSound()
+                    }label :{
+                        Image("prev")
+                        
                     }
-                    self.playSound()
-                }label :{
-                    Image("prev")
-                    
                 }
                 Spacer()
                 // next Button
-                Button{
-                    // do something
-                    if(self.index == myScenes.count - 1){
-                        self.index = myScenes.count - 1
-                    }else{
-                        self.index += 1
+                if index !=  myScenes.count - 1{
+                    Button{
+                        index += index == myScenes.count - 1 ? 0 : 1
+                        self.playSound()
+                    }label :{
+                        Image("next")
                     }
-                    self.playSound()
-                }label :{
-                    Image("next")
                 }
             }
         }.onAppear{
